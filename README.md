@@ -26,7 +26,7 @@ $ npm install
 $ gulp install
 ```
 
-Add your mobile app platforms then install the cordova rfduino plugin. Note: I had to fork the [original repo](https://github.com/don/cordova-plugin-rfduino/tree/master/examples/button) in order to fix a bug, so install the plugin from my [forked repo](https://github.com/BrendanNeufeld/cordova-plugin-rfduino) as follows.
+Add your mobile app platforms then install the cordova rfduino plugin. Note: I had to fork the [original repo](https://github.com/don/cordova-plugin-rfduino/tree/master/examples/button) so install the plugin from my [forked repo](https://github.com/BrendanNeufeld/cordova-plugin-rfduino) as follows.
 
 ```bash
 $ cordova platform add ios
