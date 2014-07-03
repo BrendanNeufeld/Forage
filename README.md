@@ -21,7 +21,7 @@ To use this project as is, first run:
 
 ```bash
 $ git clone https://github.com/BrendanNeufeld/Forage.git
-$ cd RFduino-Scavenger-Hunt
+$ cd Forage
 $ npm install
 $ gulp install
 ```
