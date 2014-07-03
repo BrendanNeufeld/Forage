@@ -1,0 +1,7 @@
+node_modules/
+platforms/
+www/lib/
+plugins/*
+!plugins/com.ionic.keyboard
+!plugins/org.apache.cordova.console
+!plugins/org.apache.cordova.device
