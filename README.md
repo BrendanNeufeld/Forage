@@ -1,40 +1,72 @@
-Ionic App Base
+RFduino Scavenger Hunt
 =====================
 
-A starting project for Ionic that optionally supports
-using custom SCSS.
+This project is a cordova mobile app built with ionic and angular. It is a scavenger hunt game that works in conjunction with 3 or more [RFduinos](http://www.rfduino.com/). Communication between the mobile app and the RFduinos is done via BLE ([Bluetooth Low Energy](http://en.wikipedia.org/wiki/Bluetooth_low_energy)). Players start the scavenger hunt by checking in with one of the RFduinos as an entry point. The app uses the signal strength (RSSI) of the RFduino to give the player a general idea of the resource's proximity. Once the player gets close to the resource (around 2 feet) the player can 'collect' the resource by connecting directly to the RFduino. At any time the player can proceed to the checkout point (checkout RFduino). Based on the time spent and the number of resources collected the checkout RFduino can be used to actuate some physical feedback.
 
 ## Using this project
 
-We recommend using the `ionic` utility to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
-
+It is recommended that you have the following utilities installed: `cordova`, `ionic`, `sass`, and `gulp`. If you are on OS X the Ruby gem installer should already be installed. If you are on Windows go [here](http://www.rubyinstaller.org/) to install. This will allow you to install Sass ([more info on installing Sass](http://sass-lang.com/install)). Use the following commands to install the recommended utilities:
 ```bash
-$ sudo npm install -g ionic
+$ sudo gem install sass
+$ sudo npm install -g cordova ionic gulp
 ```
 
-Then run:
+More information: [Apache Cordova Documentation](http://cordova.apache.org/docs/en/3.5.0/index.html), [Ionic Getting Started](http://ionicframework.com/getting-started), [Sass Guide](http://sass-lang.com/), [gulp.js](http://gulpjs.com/).
 
-```bash
-$ sudo npm install -g ionic
-$ ionic start myProject tabs
-```
-
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
+For iPhone apps you will need the Xcode [Command Line Tools](http://docwiki.embarcadero.com/RADStudio/XE4/en/Installing_the_Xcode_Command_Line_Tools_on_a_Mac) and for Android apps you will need the [Android Development Tools](http://developer.android.com/sdk/index.html).
 
 ## Installation
 
-While we recommend using the `ionic` utility to create new Ionic projects, you can use this repo as a barebones starting point to your next Ionic app.
-
-To use this project as is, first clone the repo from GitHub, then run:
+To use this project as is, first run:
 
 ```bash
-$ cd ionic-app-base
-$ sudo npm install -g cordova ionic gulp
+$ git clone https://github.com/BrendanNeufeld/RFduino-Scavenger-Hunt.git
+$ cd RFduino-Scavenger-Hunt
 $ npm install
 $ gulp install
 ```
+
+Add your mobile app platforms then install the cordova rfduino plugin. Note: I had to fork the [original repo](https://github.com/don/cordova-plugin-rfduino/tree/master/examples/button) in order to fix a bug, so install the plugin from my [forked repo](https://github.com/BrendanNeufeld/cordova-plugin-rfduino) as follows.
+
+```bash
+$ cordova platform add ios
+$ cordova platform add android
+$ cordova plugin add https://github.com/BrendanNeufeld/cordova-plugin-rfduino.git
+```
+
+## Running this project
+
+To run this project on your mobile device use:
+```bash
+$ cordova run ios -d
+```
+or
+```bash
+$ cordova run android -d
+```
+To quit the debugger run:
+```bash
+$ quit
+```
+
+To run the project in your browser you can use `ionic serve`. This may not work that well as angular is dependent on some native device events.
+
+## Debugging with Weinre (optional)
+
+For debugging this project uses [weinre](http://tinyurl.com/6quwfna)
+
+In terminal run:
+```bash
+$ weinre -boundHost <youripaddress>
+```
+Navigate to: `http://<youripaddress>:8080` and you should see the web inspector remote. Three sections down you should see the **Target Script** section.
+
+Add this script tag to `www/index.html`. e.g. `<script src="http://<youripaddress>:8080/target/target-script-min.js#anonymous"></script>`
+
+Note: Be aware that if you leave this script tag in and you change networks, it can crash the application. So comment it out when doing on-site tests.
+
+
+To start debugging click the first link at the top of weinre web inspector remote page. You will see "Targets: none" until you run the app on a device.
 
 ## Using Sass (optional)
 
@@ -52,7 +84,7 @@ the include to your `ionic.app.css` file which now contains all your Sass code a
 -->
 ```
 
-## Updating Ionic
+## Updating Ionic (optional)
 
 To update to a new version of Ionic, open bower.json and change the version listed there.
 
@@ -84,5 +116,5 @@ Warning: the nightly version is not stable.
 
 
 ## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/contribute/#issues) to the main Ionic repository. On the other hand, pull requests are welcome here!
+[Submit an issue](https://github.com/BrendanNeufeld/RFduino-Scavenger-Hunt/issues)
 
