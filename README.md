@@ -1,4 +1,4 @@
-RFduino Scavenger Hunt
+Forage
 =====================
 
 This project is a cordova mobile app built with ionic and angular. It is a game that works in conjunction with 3 or more [RFduinos](http://www.rfduino.com/). Communication between the mobile app and the RFduinos is done via BLE ([Bluetooth Low Energy](http://en.wikipedia.org/wiki/Bluetooth_low_energy)). Players start the game by checking in with one of the RFduinos as an entry point. The app uses the signal strength (RSSI) of the RFduino to give the player a general idea of the resource's proximity. Once the player gets close to the resource (around 2 feet) the player can 'collect' the resource by connecting directly to the RFduino. At any time the player can proceed to the checkout point (checkout RFduino). Based on the time spent and the number of resources collected the checkout RFduino can be used to actuate some physical feedback.
