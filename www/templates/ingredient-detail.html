@@ -4,7 +4,11 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 --> 
-<ion-view title="{{ingredient.name}}">
+
+<ion-view title="{{ingredient.name}}" class="ingredients collected-{{ingredient.isCollected}}">
+<ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/ingredients">Back</a>
+    </ion-nav-bar>
   <ion-content has-header="true" padding="true">
       {{peripheralManager.devices[deviceId].name}}<br/>
       RSSI:&nbsp;{{peripheralManager.devices[deviceId].rssi}}'&nbsp;|&nbsp;Advertising: {{peripheralManager.devices[deviceId].advertising}}<br/>
@@ -14,18 +18,14 @@
       Distance:&nbsp;{{peripheralManager.devices[deviceId].distance}}&nbsp;ft.<br/>
       Amount:&nbsp;{{peripheralManager.devices[deviceId].amount}}<br/>
       Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
-	  <header><h1>{{ingredient.name}}</h1></header>
 		<article>
             <img class="ingredient" ng-src="{{ingredient.image}}" width="100%">
-			<section>{{ingredient.description}}</section>
+
+			<section ng-bind-html="ingredient.description"></section>
             <section>{{ingredient.uuid}}</section>
-			<section>{{ingredient.hints}}</section>
-			<section>{{ingredient.recipe}}</section>
+			<section><h1>Location</h1><div ng-bind-html="ingredient.hints"></div></section>
+			<section ng-show="ingredient.isCollected"><h1>Recipe</h1><div ng-bind-html="ingredient.recipe"></div></section>
 		</article>
-
-
-
-
       <div class="padding">
       <button class="button button-block button-stable" ng-click="toggleConnect()"  ng-disabled="peripheralManager.isConnecting || peripheralManager.devices[deviceId].isCollected">
           <span ng-show="peripheralManager.devices[deviceId].isConnected" class="help-block">Disconnect</span>

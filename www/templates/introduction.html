@@ -1,15 +1,17 @@
 <!--http://scotch.io/tutorials/javascript/angularjs-form-validation-->
 <ion-view title="Forage">
+<ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    </ion-nav-bar>
     <ion-content class="has-header padding">
+	
         <h1>Welcome</h1>
 
 		<div>
         	{{game.details}}
 		</div>
-        <input type="password" name="password" ng-model="user.password"
-               ng-model-options="{ updateOn: 'blur' }" placeholder="{{staticText.password}}"
-               ng-minlength="6" ng-maxlength="20" required>
-		<input type="text" ng-model="user.userName">
+		<label class="item item-input padding">
+			<input type="text" ng-model="user.userName" placeholder="Name">
+		</label>
         <div class="padding">
 		  <button class="button button-block button-stable" ng-click="checkIn()"  ng-disabled="!user.userName && !peripherelManager.isOnSite">
 			  <span>Checkin</span>
