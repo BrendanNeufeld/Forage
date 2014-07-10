@@ -14,7 +14,8 @@
       Distance:&nbsp;{{peripheralManager.devices[deviceId].distance}}&nbsp;ft.<br/>
       Amount:&nbsp;{{peripheralManager.devices[deviceId].amount}}<br/>
       Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
-	 <article>
+		<article>
+            <img class="ingredient" ng-src="{{ingredient.image}}" width="100%">
 			<section>{{ingredient.description}}</section>
 			<section>{{ingredient.hints}}</section>
 			<section ng-show="ingredient.isCollected">{{ingredient.recipe}}</section>

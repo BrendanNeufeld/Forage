@@ -44,8 +44,17 @@ angular.module('starter.services', [])
             getIngredient: function (ingredientId) {
                 //alert('sdfljhsl')
                 // Simple index lookup
+                var ingId;
                 console.log('ingredients[ingredientId]: ',ingredients[ingredientId]);
-                return ingredients[ingredientId];
+                for (var i=0; i<ingredients.length; i++){
+                    if(ingredientId == ingredients[i].id){
+                        ingId = i;
+
+
+                    }
+                }
+                if(ingId)   return ingredients[ingId]
+                return false;
             }
         }
     })
