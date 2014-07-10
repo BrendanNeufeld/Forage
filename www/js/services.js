@@ -30,8 +30,8 @@ angular.module('starter.services', [])
 
         // Some fake testing data
         var ingredients = [
-            { id: "morel", uuid:'', name: "Morels", image: "img/Morchella.jpg", description: "Morchella, the true morels, is a genus of edible mushrooms closely related to anatomically simpler cup fungi. These distinctive mushrooms appear honeycomb-like in that the upper portion is composed of a network of ridges with pits between them. The ascocarps are prized by gourmet cooks, particularly for French cuisine. Commercial value aside, morels are hunted by thousands of people every year simply for their taste and the joy of the hunt."},
-            { id: "asparagus", uuid:'', name: "Wild Asparagus", image: "img/asparagus-spear.jpg", description: "Asparagus officinalis is a spring vegetable, a flowering perennial[1] plant species in the genus Asparagus. It was once classified in the lily family, like its Allium cousins, onions and garlic, but the Liliaceae have been split and the onion-like plants are now in the family Amaryllidaceae and asparagus in the Asparagaceae. Asparagus officinalis is native to most of Europe, northern Africa and western Asia, and is widely cultivated as a vegetable crop."},
+            { id: "morel", uuid:'2679564C-61B3-755B-E2F3-9504ED7337E1', name: "Morels", image: "img/Morchella.jpg", description: "Morchella, the true morels, is a genus of edible mushrooms closely related to anatomically simpler cup fungi. These distinctive mushrooms appear honeycomb-like in that the upper portion is composed of a network of ridges with pits between them. The ascocarps are prized by gourmet cooks, particularly for French cuisine. Commercial value aside, morels are hunted by thousands of people every year simply for their taste and the joy of the hunt."},
+            { id: "asparagus", uuid:'2679564C-61B3-755B-E2F3-9504ED7337E1', name: "Wild Asparagus", image: "img/asparagus-spear.jpg", description: "Asparagus officinalis is a spring vegetable, a flowering perennial[1] plant species in the genus Asparagus. It was once classified in the lily family, like its Allium cousins, onions and garlic, but the Liliaceae have been split and the onion-like plants are now in the family Amaryllidaceae and asparagus in the Asparagaceae. Asparagus officinalis is native to most of Europe, northern Africa and western Asia, and is widely cultivated as a vegetable crop."},
             { id: "garlic", uuid:'', name: "Wild Garlic", image: "img/Allium_canadense.jpg", description: "Wild onion (Allium canadense), also known as Canada onion, wild garlic, meadow garlic, and Canadian garlic,[3] is a perennial plant native to eastern North America from Texas to Florida to New Brunswick to Montana. The species is also cultivated in other regions as an ornamental and as a garden culinary herb.[4] The plant is also reportedly naturalized in Cuba."},
             { id: "redfife",  uuid:'', name: "Red Fife Wheat", image: "img/red-fife-1.jpg", description: "Red Fife is a cultivar of bread wheat that originated in Peterborough, Ontario in 1842. It is believed to have crossed several continents and the Atlantic before arriving in Canada, where it gained a foothold on the land of David Fife, from which it is named."},
             { id: "fiddleheads", uuid:'', name: "Fiddlehead Greens", image: "img/fiddlehead.jpg", description: "Fiddlehead greens are the furled fronds of a young fern,[1] harvested for use as a vegetable. Left on the plant, each fiddlehead would unroll into a new frond (circinate vernation)"}
@@ -49,13 +49,12 @@ angular.module('starter.services', [])
                 for (var i=0; i<ingredients.length; i++){
                     if(ingredientId == ingredients[i].id){
                         ingId = i;
-
-
                     }
                 }
-                if(ingId)   return ingredients[ingId]
+                if(ingId)   return ingredients[ingId];
                 return false;
             }
+
         }
     })
 
@@ -85,7 +84,7 @@ angular.module('starter.services', [])
 
     })
 
-    .service("PeripheralManager", function ($rootScope) {
+    .service("PeripheralManager", function ($rootScope, Game) {
 
         var self = this;
         var discoverTimout;
@@ -186,6 +185,15 @@ angular.module('starter.services', [])
                         device.distance = 'out of range'
                     }
                     self.devices[device.uuid] = device;
+//
+//                    alert(Game.ingredients[0].uuid);
+
+                    for(var i = 0 ; i < Game.ingredients.length; i ++){
+                        if(device.uuid == Game.ingredients[i].uuid){
+                            //Game.ingredients =
+                            alert('match')
+                        }
+                    }
                 });
             }, function () {
                 alert('discover error!');
@@ -363,6 +371,8 @@ angular.module('starter.services', [])
 
         this.init = function () {
             console.log('init');
+           // alert('sldjfsldj')
+            console.log('--Game: ',Game);
             //console.log()
             self.enabled();
         };
@@ -370,7 +380,4 @@ angular.module('starter.services', [])
         document.addEventListener('deviceready', this.init, false);
 
 
-        this.greetTo = function (name) {
-            this.greet = "Hello " + name;
-        }
     });
