@@ -1,5 +1,16 @@
 angular.module('starter.controllers', [])
 
+    .controller('IntroductionCtrl', function ($scope, $rootScope, PeripheralManager) {
+
+        $scope.peripheralManager = PeripheralManager;
+
+        /*PeripheralManager.disconnect();
+
+        $scope.$on('$viewContentLoaded', function(e){
+            //alert('sldkjf')
+        });*/
+    })
+
     .controller('DevicesCtrl', function ($scope, $rootScope, PeripheralManager) {
 
         $scope.peripheralManager = PeripheralManager;
