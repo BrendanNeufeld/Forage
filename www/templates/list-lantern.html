@@ -2,13 +2,16 @@
     <ion-content class="has-header padding">
         <ion-list>
             <ion-item ng-repeat="(id, device) in peripheralManager.devices" type="item-text-wrap" href="#/tab/device/{{device.uuid}}">
-                {{device.ingredientName}}
-				<!--
-                RSSI:&nbsp;{{device.rssi}}'&nbsp;|&nbsp;Advertising: {{device.advertising}}<br/>
+               	RSSI:&nbsp;{{device.rssi}}'&nbsp;|&nbsp;Advertising: {{device.advertising}}<br/>
                 {{device.uuid}}<br/>
                 Distance:&nbsp;{{device.distance}}&nbsp;ft.<br/>
                 Collected:&nbsp;{{device.isCollected}}<br/>
-				-->
+				
+            </ion-item>
+        </ion-list>
+		<ion-list>
+            <ion-item ng-repeat="ingredient in ingredients" type="item-text-wrap" href="#/ingredients/{{ingredient.id}}">
+                {{ingredient.name}}
             </ion-item>
         </ion-list>
 		
