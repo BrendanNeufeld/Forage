@@ -14,11 +14,10 @@
       Distance:&nbsp;{{peripheralManager.devices[deviceId].distance}}&nbsp;ft.<br/>
       Amount:&nbsp;{{peripheralManager.devices[deviceId].amount}}<br/>
       Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
-	  <header><h1>{{ingredient.name}}</h1></header>
-		<article>
+	 <article>
 			<section>{{ingredient.description}}</section>
 			<section>{{ingredient.hints}}</section>
-			<section>{{ingredient.recipe}}</section>
+			<section ng-show="ingredient.isCollected">{{ingredient.recipe}}</section>
 		</article>
       <div class="padding">
       <button class="button button-block button-stable" ng-click="toggleConnect()"  ng-disabled="peripheralManager.isConnecting || peripheralManager.devices[deviceId].isCollected">

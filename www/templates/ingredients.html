@@ -6,8 +6,7 @@
                 {{device.uuid}}<br/>
                 Distance:&nbsp;{{device.distance}}&nbsp;ft.<br/>
                 Collected:&nbsp;{{device.isCollected}}<br/>
-				
-            </ion-item>
+			</ion-item>
         </ion-list>
 		<ion-list>
             <ion-item ng-repeat="ingredient in ingredients" type="item-text-wrap" href="#/ingredient/{{ingredient.id}}">
@@ -16,7 +15,7 @@
         </ion-list>
 		
 		<div class="padding">
-		  <button class="button button-block button-stable" ng-click="checkout()"  ng-show="peripheralManager.isCheckedIn">
+		  <button class="button button-block button-stable" ng-click="checkout()"  ng-show="peripherelManager.isOnSite && peripheralManager.isCheckedIn">
 			  <span>Checkout</span>
 		  </button>
 		</div>
