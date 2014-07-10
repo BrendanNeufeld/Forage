@@ -1,0 +1,43 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'firend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+--> 
+<ion-view title="{{ingredient.name}}">
+  <ion-content has-header="true" padding="true">
+      {{peripheralManager.devices[deviceId].name}}<br/>
+      RSSI:&nbsp;{{peripheralManager.devices[deviceId].rssi}}'&nbsp;|&nbsp;Advertising: {{peripheralManager.devices[deviceId].advertising}}<br/>
+      {{peripheralManager.devices[deviceId].uuid}}<br/>
+      Connected:&nbsp;{{peripheralManager.devices[deviceId].isConnected | json}}<br/>
+      Connecting:&nbsp;{{peripheralManager.devices[deviceId].isConnecting | json}}<br/>
+      Distance:&nbsp;{{peripheralManager.devices[deviceId].distance}}&nbsp;ft.<br/>
+      Amount:&nbsp;{{peripheralManager.devices[deviceId].amount}}<br/>
+      Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
+	  <header><h1>{{ingredient.name}}</h1></header>
+		<article>
+			<section>{{ingredient.description}}</section>
+			<section>{{ingredient.hints}}</section>
+			<section>{{ingredient.recipe}}</section>
+		</article>
+      <div class="padding">
+      <button class="button button-block button-stable" ng-click="toggleConnect()"  ng-disabled="peripheralManager.isConnecting || peripheralManager.devices[deviceId].isCollected">
+          <span ng-show="peripheralManager.devices[deviceId].isConnected" class="help-block">Disconnect</span>
+          <span ng-show="!peripheralManager.devices[deviceId].isConnected" class="help-block">Connect</span>
+      </button>
+  </div>
+      <div class="padding">
+          <button class="button button-block button-stable" ng-click="ping()"  ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected || !peripheralManager.devices[deviceId].isConnected">
+              <span>Ping</span>
+          </button>
+          <button class="button button-block button-stable" ng-click="collect()"  ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected || !peripheralManager.devices[deviceId].isConnected">
+              <span>Collect</span>
+          </button>
+      </div>
+      <div class="padding">
+          <button class="button button-block button-stable" ng-click="reset()"  ng-show="peripheralManager.devices[deviceId].isCollected">
+              <span>Reset</span>
+          </button>
+      </div>
+  </ion-content>
+</ion-view>

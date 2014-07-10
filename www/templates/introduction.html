@@ -3,15 +3,14 @@
     <ion-content class="has-header padding">
         <h1>Welcome</h1>
 
-        <p>Check in instructions date</p>
-
-        <button class="button button-block button-stable" ng-click="playGame()">
-            Connect
-            <!-- SUBMIT BUTTON -->
-            <!-- <button type="submit" class="button button-block button-stable">Submit</button>-->
-        </button>
-
-
-
+		<div>
+        	{{game.details}}
+		</div>
+		<input type="text" ng-model="user.userName"> 
+        <div class="padding">
+		  <button class="button button-block button-stable" ng-click="checkIn()"  ng-disabled="!user.userName && !peripherelManager.isOnSite">
+			  <span>Checkin</span>
+		  </button>
+		</div>
     </ion-content>
 </ion-view>
