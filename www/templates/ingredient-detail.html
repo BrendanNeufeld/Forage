@@ -16,10 +16,15 @@
       Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
 	  <header><h1>{{ingredient.name}}</h1></header>
 		<article>
+            <img class="ingredient" ng-src="{{ingredient.image}}" width="100%">
 			<section>{{ingredient.description}}</section>
 			<section>{{ingredient.hints}}</section>
 			<section>{{ingredient.recipe}}</section>
 		</article>
+
+
+
+
       <div class="padding">
       <button class="button button-block button-stable" ng-click="toggleConnect()"  ng-disabled="peripheralManager.isConnecting || peripheralManager.devices[deviceId].isCollected">
           <span ng-show="peripheralManager.devices[deviceId].isConnected" class="help-block">Disconnect</span>
