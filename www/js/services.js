@@ -71,6 +71,10 @@ angular.module('starter.services', [])
         var self = this;
         this.userName = '';
         this.userId = '';
+		
+		this.userNameEntered = function(){
+			return (this.userName.toString().length == null || this.userName == "");	
+		}
 
         if(window.localStorage[userId]){
             self.userId = window.localStorage[userId];
