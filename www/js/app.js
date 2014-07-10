@@ -51,6 +51,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 controller: 'IntroductionCtrl'
             })
 
+            .state('ingredients', {
+                url: '/ingredients',
+                templateUrl: 'templates/ingredients.html',
+                controller: 'IngredientsCtrl'
+            })
+
+            .state('ingredient-detail', {
+                url: '/ingredient/:ingredientId',
+                templateUrl: 'templates/ingredient-detail.html',
+                controller: 'IngredientDetailCtrl'
+            })
+
             .state('tab.devices', {
                 url: '/devices',
                 views: {

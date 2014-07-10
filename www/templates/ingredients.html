@@ -1,4 +1,4 @@
-<ion-view title="RFduinos">
+<ion-view title="Ingredients">
     <ion-content class="has-header padding">
         <ion-list>
             <ion-item ng-repeat="(id, device) in peripheralManager.devices" type="item-text-wrap" href="#/tab/device/{{device.uuid}}">
@@ -10,7 +10,7 @@
             </ion-item>
         </ion-list>
 		<ion-list>
-            <ion-item ng-repeat="ingredient in ingredients" type="item-text-wrap" href="#/ingredients/{{ingredient.id}}">
+            <ion-item ng-repeat="ingredient in ingredients" type="item-text-wrap" href="#/ingredient/{{ingredient.id}}">
                 {{ingredient.name}}
             </ion-item>
         </ion-list>

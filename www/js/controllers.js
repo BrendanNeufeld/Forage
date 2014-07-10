@@ -11,6 +11,32 @@ angular.module('starter.controllers', [])
         });*/
     })
 
+    .controller('IngredientsCtrl', function ($scope, $rootScope, PeripheralManager, Game) {
+
+        $scope.peripheralManager = PeripheralManager;
+
+        $scope.ingredients = Game.allIngredients();
+
+        /*PeripheralManager.disconnect();
+
+        $scope.$on('$viewContentLoaded', function(e){
+            //alert('sldkjf')
+        });
+        */
+
+    })
+
+    .controller('IngredientDetailCtrl', function ($scope, $rootScope, $stateParams, PeripheralManager, Game) {
+        console.log('IngredientDetailCtrl');
+        $scope.ingredient = Game.getIngredient($stateParams.ingredientId);
+
+        console.log('Game: ',Game);
+
+        //console.log('$stateParams.ingredientId: ',$stateParams.ingredientId);
+
+        console.log("ingredient:", $scope.ingredient);
+    })
+
     .controller('DevicesCtrl', function ($scope, $rootScope, PeripheralManager) {
 
         $scope.peripheralManager = PeripheralManager;
