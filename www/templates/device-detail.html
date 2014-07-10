@@ -22,7 +22,7 @@
       </button>
   </div>
       <div class="padding">
-          <button class="button button-block button-stable" ng-click="collect()"  ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected">
+          <button class="button button-block button-stable" ng-click="collect()"  ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected || !peripheralManager.devices[deviceId].isConnected">
               <span>Collect</span>
           </button>
       </div>

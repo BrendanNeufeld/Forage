@@ -1,10 +1,14 @@
 angular.module('starter.controllers', [])
 
-    .controller('DevicesCtrl', function ($scope, $rootScope, Lanterns, PeripheralManager) {
+    .controller('DevicesCtrl', function ($scope, $rootScope, PeripheralManager) {
 
         $scope.peripheralManager = PeripheralManager;
 
         PeripheralManager.disconnect();
+
+        $scope.$on('$viewContentLoaded', function(e){
+            //alert('sldkjf')
+        });
 
     })
 
@@ -48,65 +52,6 @@ angular.module('starter.controllers', [])
 
     })
 
-    /*
-    .controller('DeviceDetailCtrl', function ($scope, $stateParams, Lanterns) {
-
-        $scope.isConnecting = Lanterns.isConnecting();
-        $scope.distance = "unknown";
-        $scope.device = Lanterns.get($stateParams.deviceId);
-
-        Lanterns.onData(function(data){
-            console.log('onData, success: ',data);
-            var a = new Float32Array(data);
-            console.log('value: ',  a[0]);
-        },function(data){
-            console.log('onData, failure: ', data);
-        });
-
-        $scope.toggleConnect = function () {
-            console.log('toggleConnect');
-
-            $scope.isConnecting = Lanterns.isConnecting();
-            if(Lanterns.isConnecting()) return;
-
-            if(Lanterns.get($stateParams.deviceId).isConnected){
-                Lanterns.disconnect(disconnectSuccess, disconnectFailure);
-            }else{
-                Lanterns.connect($stateParams.deviceId, connectSuccess, connectFailure);
-            }
-
-            $scope.isConnecting = Lanterns.isConnecting();
-        };
-
-        var connectSuccess = function (args) {
-            console.log('connnectSuccess, args: ',args);
-            $scope.isConnecting = Lanterns.isConnecting();
-            $scope.device = Lanterns.get($stateParams.deviceId);
-            console.log("device: ",Lanterns.get($stateParams.deviceId));
-        };
-
-        var connectFailure = function (args) {
-            console.log('connectFailure, args: ',args);
-            $scope.isConnecting = Lanterns.isConnecting();
-            $scope.device = Lanterns.get($stateParams.deviceId);
-        };
-
-        var disconnectSuccess = function (args) {
-            console.log('disconnectSuccess, args: ',args);
-            $scope.isConnecting = Lanterns.isConnecting();
-            $scope.device = Lanterns.get($stateParams.deviceId);
-            console.log("device: ",Lanterns.get($stateParams.deviceId));
-        };
-
-        var disconnectFailure = function (args) {
-            console.log('disconnectFailure, args: ',args);
-            $scope.isConnecting = Lanterns.isConnecting();
-            $scope.device = Lanterns.get($stateParams.deviceId);
-        };
-
-    })
-    */
-
     .controller('FriendsCtrl', function ($scope, Friends) {
         $scope.friends = Friends.all();
     })
@@ -115,25 +60,7 @@ angular.module('starter.controllers', [])
         $scope.friend = Friends.get($stateParams.friendId);
     })
 
-    .controller('AccountCtrl', function ($scope, $stateParams, Lanterns) {
+    .controller('AccountCtrl', function ($scope, $stateParams, PeripheralManager) {
+        $scope.peripheralManager = PeripheralManager;
 
-        var initPage = function(){
-            Lanterns.isConnected(function(){
-                console.log('isConnected = true');
-                $scope.isConnected = true;
-            }, function(){
-                console.log('isConnected = false');
-                $scope.isConnected = false;
-            });
-            Lanterns.isEnabled(function(){
-                console.log('isEnabled = true');
-                $scope.isEnabled = true;
-            }, function(){
-                console.log('isEnabled = false');
-                $scope.isEnabled = false;
-                alert('BLE is not enabled!');
-            });
-        };
-
-        document.addEventListener('deviceready', initPage, false);
     });

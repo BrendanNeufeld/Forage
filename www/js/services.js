@@ -57,6 +57,7 @@ angular.module('starter.services', [])
         this.isConnecting = false;
         this.isDiscovering = false;
         this.isCollecting = false;
+        this.isEnabled = false;
 
         this.devices = {};
 
@@ -275,7 +276,7 @@ angular.module('starter.services', [])
 
 
 
-        this.isEnabled = function () {
+        this.enabled = function () {
             rfduino.isEnabled(
                 function () {
                     console.log("RFduino is enabled");
@@ -298,7 +299,8 @@ angular.module('starter.services', [])
 
         this.init = function () {
             console.log('init');
-            self.isEnabled();
+            //console.log()
+            self.enabled();
         };
 
         document.addEventListener('deviceready', this.init, false);
@@ -306,225 +308,5 @@ angular.module('starter.services', [])
 
         this.greetTo = function (name) {
             this.greet = "Hello " + name;
-        }
-    })
-
-    .factory('Lanterns', function ($rootScope) {
-
-        var self = this;
-        var devices = [];
-        var isInitialized = false;
-
-        var isConnected = false;
-        var connectedDeiviceId;
-        var isConnecting = false;
-
-        var isDiscovering = false;
-        var discoverTimout;
-
-        //document.addEventListener('deviceready', $scope.refreshDeviceList, false);
-
-        return {
-            all: function () {
-                return devices;
-            },
-            get: function (uuid) {
-                // Simple index lookup
-                for (var i = 0; i < devices.length; i++) {
-                    if (devices[i].uuid == uuid) {
-                        return devices[i];
-                    }
-                }
-            },
-            isInitialized: function () {
-                return isInitialized;
-            },
-            discover: function (sec, successCallback, failureCallback) {
-                console.log('Lanterns.discover');
-
-                //$.extend( true, object1, object2 );
-
-                isInitialized = true;
-                isDiscovering = true;
-                var devices_old = devices;
-                devices = [];
-
-                rfduino.discover(sec, function (device) {
-                    console.log('rfduino.discover, device: ', device);
-
-                    var match = false;
-                    for (var i = 0; i < devices_old.length; i++) {
-                        if (devices_old[i].uuid == device.uuid) {
-                            device = $.extend(true, devices_old[i], device);
-                            match = true;
-                        }
-                    }
-                    if (!match)  device.isConnected = false;
-                    devices.push(device);
-                    $rootScope.$apply(function () {
-                        successCallback(device);
-                    });
-
-                }, function () {
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        failureCallback(args);
-                    });
-                });
-
-                discoverTimout = setTimeout(function () {
-                    isDiscovering = false;
-                }, sec * 1000);
-            },
-            isDiscovering: function () {
-                return isDiscovering;
-            },
-            list: function (successCallback, failureCallback) {
-                rfduino.list(function (deviceList) {
-                    devices = deviceList;
-                    $rootScope.$apply(function () {
-                        successCallback(deviceList);
-                    });
-                }, function () {
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        failureCallback(args);
-                    });
-                })
-            },
-            connect: function (uuid, successCallback, failureCallback) {
-                var deviceId = uuid;
-                isConnecting = true;
-                rfduino.connect(uuid, function () {
-                    console.log('connected to : ', uuid);
-                    var args = arguments;
-                    isConnecting = false;
-                    isConnected = true;
-                    connectedDeiviceId = deviceId;
-                    for (var i = 0; i < devices.length; i++) {
-                        if (devices[i].uuid == uuid) {
-                            devices[i].isConnected = true;
-                        }
-                    }
-                    $rootScope.$apply(function () {
-                        successCallback(args);
-                    });
-                }, function () {
-                    var args = arguments;
-                    isConnecting = false;
-                    isConnected = false;
-                    for (var i = 0; i < devices.length; i++) {
-                        if (devices[i].uuid == uuid) {
-                            devices[i].isConnected = false;
-                        }
-                    }
-                    $rootScope.$apply(function () {
-                        failureCallback(args);
-                    });
-                });
-            },
-            disconnect: function (successCallback, failureCallback) {
-                isConnecting = true;
-                rfduino.disconnect(function () {
-                    isConnecting = false;
-                    isConnected = false;
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        successCallback(args);
-                    });
-                }, function () {
-                    var args = arguments;
-                    isConnecting = false;
-                    isConnected = true;
-                    $rootScope.$apply(function () {
-                        failureCallback(args);
-                    });
-                });
-            },
-            onData: function (successCallback, failureCallback) {
-                rfduino.onData(function () {
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        successCallback.apply(self, args);
-                    });
-                }, function () {
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        failureCallback.apply(self, args);
-                    });
-                });
-
-            },
-            testFunction: function () {
-                console.log('testFunction');
-            },
-            arrayBufferToFloat: function (ab) {
-                var a = new Float32Array(ab);
-                return a[0];
-            },
-            write: function (data, successCallback, failureCallback) {
-                rfduino.write(data, function () {
-                    console.log("write success!");
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        successCallback.apply(self, args);
-                    });
-                }, function () {
-                    console.log("write failure");
-                    var args = arguments;
-                    $rootScope.$apply(function () {
-                        failureCallback.apply(self, args);
-                    });
-                });
-            },
-            isConnected: function (successCallback, failureCallback) {
-
-                if (!successCallback) {
-                    return isConnected;
-                }
-
-                rfduino.isConnected(
-                    function () {
-                        console.log("RFduino is isConnected");
-                        isConnected = true;
-                        $rootScope.$apply(function () {
-                            successCallback(arguments);
-                        });
-                    },
-                    function () {
-                        console.log("RFduino is *not* connected");
-                        isConnected = false;
-                        $rootScope.$apply(function () {
-                            failureCallback(arguments);
-                        });
-                    }
-                );
-            },
-            isConnecting: function () {
-                return isConnecting;
-            },
-            getConnected: function () {
-                for (var i = 0; i < devices.length; i++) {
-                    if (devices[i].uuid == connectedDeiviceId) {
-                        return devices[i];
-                    }
-                }
-            },
-            isEnabled: function (successCallback, failureCallback) {
-                rfduino.isEnabled(
-                    function () {
-                        console.log("RFduino is enabled");
-                        $rootScope.$apply(function () {
-                            successCallback(arguments);
-                        });
-                    },
-                    function () {
-                        console.log("RFduino is *not* enabled");
-                        $rootScope.$apply(function () {
-                            failureCallback(arguments);
-                        });
-                    }
-                );
-            }
         }
     });
