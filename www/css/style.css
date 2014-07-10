@@ -1,1 +1,11 @@
 /* Empty. Add your own CSS if you like */
+.ingredients.collected-true .bar-stable{
+	background:green;
+}
+.ingredients.collected-false .bar-stable{
+	background:#6666AA;
+	transition:all 0.5s;
+}
+.ingredients.collected-false .bar-stable:hover{
+	background:#AA6666;
+}

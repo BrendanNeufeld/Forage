@@ -1,5 +1,8 @@
 <ion-view title="Ingredients">
+<ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    </ion-nav-bar>
     <ion-content class="has-header padding">
+	
         <ion-list>
             <ion-item ng-repeat="(id, device) in peripheralManager.devices" type="item-text-wrap" href="#/tab/device/{{device.uuid}}">
                	RSSI:&nbsp;{{device.rssi}}'&nbsp;|&nbsp;Advertising: {{device.advertising}}<br/>
