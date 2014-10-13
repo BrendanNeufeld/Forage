@@ -23,6 +23,7 @@
 
 			<section ng-bind-html="ingredient.description"></section>
             <section>{{ingredient.uuid}}</section>
+            <section>Whaaat: {{ingredient.distance}}</section>
 			<section><h1>Location</h1><div ng-bind-html="ingredient.hints"></div></section>
 			<section ng-show="ingredient.isCollected"><h1>Recipe</h1><div ng-bind-html="ingredient.recipe"></div></section>
 		</article>

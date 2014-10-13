@@ -28,9 +28,14 @@ angular.module('starter.controllers', [])
 
     .controller('IngredientDetailCtrl', function ($scope, $rootScope, $stateParams, PeripheralManager, Game) {
         console.log('IngredientDetailCtrl');
+
+        $scope.toggleConnect = function(){
+
+        }
+
         $scope.ingredient = Game.getIngredient($stateParams.ingredientId);
 
-        console.log('Game: ',Game);
+        //console.log('Game: ',Game);
 
         //console.log('$stateParams.ingredientId: ',$stateParams.ingredientId);
 
