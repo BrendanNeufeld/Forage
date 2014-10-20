@@ -1,21 +1,25 @@
 angular.module('starter.controllers', [])
 
-    .controller('IntroductionCtrl', function ($scope, $rootScope, PeripheralManager) {
+	.controller('AboutCtrl', ['$scope', '$stateParams', 'PeripheralManager', 'Config', '$state', function ($scope, $stateParams, PeripheralManager, Config, $state) {
+		$scope.peripheralManager = PeripheralManager;
+		$scope.doDebug = Config.doDebug;
+		$scope.st = Config.staticText.get('about');
+		$scope.play = function(){
+			$state.go('tab.ingredients');
+		};
+	}])
+
+	.controller('TabsCtrl', function ($scope, $rootScope, Config) {
+		$scope.doDebug = Config.doDebug;
+	})
+
+    .controller('IngredientsCtrl', ['$scope', '$rootScope', 'PeripheralManager', 'Game', 'Config', function ($scope, $rootScope, PeripheralManager, Game, Config) {
 
         $scope.peripheralManager = PeripheralManager;
 
-        /*PeripheralManager.disconnect();
+        $scope.ingredients = Game.getList('ingredients');
 
-        $scope.$on('$viewContentLoaded', function(e){
-            //alert('sldkjf')
-        });*/
-    })
-
-    .controller('IngredientsCtrl', function ($scope, $rootScope, PeripheralManager, Game) {
-
-        $scope.peripheralManager = PeripheralManager;
-
-        $scope.ingredients = Game.allIngredients();
+		$scope.st = Config.staticText.get('ingredients');
 
         /*PeripheralManager.disconnect();
 
@@ -24,7 +28,7 @@ angular.module('starter.controllers', [])
         });
         */
 
-    })
+    }])
 
     .controller('IngredientDetailCtrl', function ($scope, $rootScope, $stateParams, PeripheralManager, Game) {
         console.log('IngredientDetailCtrl');
@@ -33,7 +37,8 @@ angular.module('starter.controllers', [])
 
         }
 
-        $scope.ingredient = Game.getIngredient($stateParams.ingredientId);
+//        $scope.ingredient = Game.getIngredient($stateParams.ingredientId);
+        $scope.ingredient = Game.getListItem('ingredients', $stateParams.ingredientId);
 
         //console.log('Game: ',Game);
 
@@ -41,6 +46,17 @@ angular.module('starter.controllers', [])
 
         console.log("ingredient:", $scope.ingredient);
     })
+
+	.controller('RecipesCtrl', ['$scope', 'Game', function ($scope, Game) {
+//		console.log(Game.getList('recipes'))
+		$scope.recipes = Game.getList('recipes');
+	}])
+
+	.controller('RecipeDetailCtrl', ['$scope', '$stateParams', 'Game', 'Config', function ($scope, $stateParams, Game, Config) {
+		$scope.recipe = Game.getListItem('recipes', $stateParams.recipeId);
+		$scope.st = Config.staticText.get('recipes');
+//		console.log($scope.recipe);
+	}])
 
     .controller('DevicesCtrl', function ($scope, $rootScope, PeripheralManager) {
 
@@ -94,15 +110,16 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('FriendsCtrl', function ($scope, Friends) {
-        $scope.friends = Friends.all();
-    })
-
-    .controller('FriendDetailCtrl', function ($scope, $stateParams, Friends) {
-        $scope.friend = Friends.get($stateParams.friendId);
-    })
-
-    .controller('AccountCtrl', function ($scope, $stateParams, PeripheralManager) {
-        $scope.peripheralManager = PeripheralManager;
-
-    });
+	.controller('IntroductionCtrl', ['$scope','$rootScope','PeripheralManager','Game', 'User', '$state', function ($scope, $rootScope, PeripheralManager, Game, User, $state) {
+		$scope.peripheralManager = PeripheralManager;
+		$scope.game = Game;
+		$scope.user = User;
+		$scope.checkIn = function(user){
+			User.setUserName(user.userName);
+			$state.go('tab.ingredients');
+		};
+		/*PeripheralManager.disconnect();
+		 $scope.$on('$viewContentLoaded', function(e){
+		 //alert('sldkjf')
+		 });*/
+	}]);

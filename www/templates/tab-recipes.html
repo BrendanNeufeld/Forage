@@ -1,0 +1,10 @@
+<ion-view title="Recipes">
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7"></ion-nav-bar>
+    <ion-content class="has-header padding">
+        <ion-list>
+            <ion-item ng-repeat="recipe in recipes" type="item-text-wrap" href="#/tab/recipe/{{recipe.id}}">
+                {{recipe.name}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

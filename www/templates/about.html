@@ -1,0 +1,33 @@
+<ion-view title="{{st.appTitle}}">
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7"></ion-nav-bar>
+    <ion-content class="padding">
+        <h1 class="padding">{{st.welcome}}</h1>
+
+        <p class="padding">{{st.gameDescription}}</p>
+        <ion-list>
+            <ion-item ng-repeat="item in st.instructions" type="item-text-wrap">
+                {{item.step}}
+            </ion-item>
+        </ion-list>
+
+        <button class="button button-block button-stable" ng-click="play()">
+            <span class="help-block">{{st.play}}</span>
+        </button>
+
+        <div ng-show={{doDebug}}>
+        <pre>doDebug = {{doDebug | json}}</pre>
+        Peripheral isConnected:&nbsp;{{peripheralManager.isConnected | json}}<br/>
+        BLE isEnabled:&nbsp;{{peripheralManager.isEnabled | json}}<br/>
+        </div>
+
+
+        <!--<button ng-show="gameReady" class="button button-block button-stable" ng-click="playGame()">
+            {{staticText.getStarted}}
+        </button>-->
+        <!-- <div class="padding">
+             <button class="button button-block button-stable" ng-click="toggleConnect()" >
+                 <span ng-show="!peripheralManager.devices[deviceId].isConnected" class="help-block">Connect</span>
+             </button>
+         </div>-->
+    </ion-content>
+</ion-view>

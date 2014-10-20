@@ -15,9 +15,54 @@ $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
 
+$borders: #ccc;
+$backgroundHightlight: #eee;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+ion-nav-view {
+  background-color: white;
+}
+
+h1, h2, h3, h4, h5, .button {
+  text-transform: capitalize;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+.ingredient, .recipe {
+  width: 50%;
+  border: solid 1px $borders;
+  padding: 4px;
+  margin-right: 10px;
+}
+
+.ordered{
+  list-style: decimal;
+  padding-left: 20px;
+  li{
+    padding-bottom: 5px;
+  }
+}
+
+.overview{
+  font-size: 12px;
+  border: solid 1px $borders;
+  padding: 4px;
+  margin-top: 4px;
+  background-color: $backgroundHightlight;
+  span{
+    padding: 5%;
+    text-align: center;
+  }
+
+}
+.small{
+  font-size: 10px;
+}

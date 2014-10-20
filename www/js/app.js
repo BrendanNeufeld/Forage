@@ -30,6 +30,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .config(function ($stateProvider, $urlRouterProvider) {
 
+
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
         // Set up the various states which the app can be in.
@@ -40,7 +41,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('tab', {
                 url: "/tab",
                 abstract: true,
-                templateUrl: "templates/tabs.html"
+                templateUrl: "templates/tabs.html",
+		        controller: "TabsCtrl"
             })
 
             // Each tab has its own nav history stack:
@@ -51,17 +53,37 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 controller: 'IntroductionCtrl'
             })
 
-            .state('ingredients', {
-                url: '/ingredients',
-                templateUrl: 'templates/ingredients.html',
-                controller: 'IngredientsCtrl'
-            })
+//            .state('ingredients', {
+//                url: '/ingredients',
+//                templateUrl: 'templates/tab-ingredients.html',
+//                controller: 'IngredientsCtrl'
+//            })
 
-            .state('ingredient-detail', {
+	        .state('tab.ingredients', {
+		        url: '/ingredients',
+		        views: {
+			        'tab-ingredients': {
+				        templateUrl: 'templates/tab-ingredients.html',
+				        controller: 'IngredientsCtrl'
+			        }
+		        }
+	        })
+
+	        .state('tab.ingredient-detail', {
+		        url: '/ingredient/:ingredientId',
+		        views: {
+			        'tab-ingredients': {
+				        templateUrl: 'templates/ingredient-detail.html',
+				        controller: 'IngredientDetailCtrl'
+			        }
+		        }
+	        })
+
+            /*.state('ingredient-detail', {
                 url: '/ingredient/:ingredientId',
                 templateUrl: 'templates/ingredient-detail.html',
                 controller: 'IngredientDetailCtrl'
-            })
+            })*/
 
             .state('tab.devices', {
                 url: '/devices',
@@ -83,38 +105,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 }
             })
 
-            .state('tab.friends', {
-                url: '/friends',
+            .state('tab.recipes', {
+                url: '/recipes',
                 views: {
-                    'tab-friends': {
-                        templateUrl: 'templates/tab-friends.html',
-                        controller: 'FriendsCtrl'
+                    'tab-recipes': {
+                        templateUrl: 'templates/tab-recipes.html',
+                        controller: 'RecipesCtrl'
                     }
                 }
             })
-            .state('tab.friend-detail', {
-                url: '/friend/:friendId',
+            .state('tab.recipe-detail', {
+                url: '/recipe/:recipeId',
                 views: {
-                    'tab-friends': {
-                        templateUrl: 'templates/friend-detail.html',
-                        controller: 'FriendDetailCtrl'
+                    'tab-recipes': {
+                        templateUrl: 'templates/recipe-detail.html',
+                        controller: 'RecipeDetailCtrl'
                     }
                 }
             })
 
-            .state('tab.account', {
-                url: '/account',
+            .state('tab.about', {
+                url: '/about',
                 views: {
-                    'tab-account': {
-                        templateUrl: 'templates/tab-account.html',
-                        controller: 'AccountCtrl'
+                    'tab-about': {
+                        templateUrl: 'templates/about.html',
+                        controller: 'AboutCtrl'
                     }
                 }
             })
 
         // if none of the above states are matched, use this as the fallback
         //$urlRouterProvider.otherwise('/tab/devices');
-        $urlRouterProvider.otherwise('ingredients');
+        $urlRouterProvider.otherwise('/tab/about');
+//        $urlRouterProvider.otherwise('/tab/ingredients');
 
     });
 

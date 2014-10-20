@@ -6,16 +6,17 @@
 	
         <h1>Welcome</h1>
 
-		<div>
-        	{{game.details}}
-		</div>
+		<p>
+        	{{game.description}}
+		</p>
 		<label class="item item-input padding">
 			<input type="text" ng-model="user.userName" placeholder="Name">
 		</label>
         <div class="padding">
-		  <button class="button button-block button-stable" ng-click="checkIn()"  ng-disabled="!(user.userName && peripheralManager.isOnSite)">
+		  <button class="button button-block button-stable" ng-click="checkIn(user)"  ng-disabled="!(user.userName && peripheralManager.isOnSite)">
 			  <span>Checkin</span>
 		  </button>
 		</div>
+        <pre>user = {{user | json}}</pre>
     </ion-content>
 </ion-view>

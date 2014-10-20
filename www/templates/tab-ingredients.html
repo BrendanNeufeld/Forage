@@ -1,0 +1,26 @@
+<ion-view title="{{st.ingredients}}">
+<ion-nav-bar class="bar-stable nav-title-slide-ios7"></ion-nav-bar>
+    <ion-content class="has-header padding">
+
+		<ion-list>
+            <ion-item ng-repeat="ingredient in ingredients" type="item-text-wrap" href="#/tab/ingredient/{{ingredient.id}}" class="item-icon-right">
+                {{ingredient.name}}&nbsp;&nbsp;<span class="small">({{ingredient.device.distance}})</span>{{ingredient.device.isCollected}}<i ng-show={{ingredient.device.isCollected}} class="icon ion-checkmark"></i>
+            </ion-item>
+        </ion-list>
+		
+		<div class="padding">
+		  <button class="button button-block button-stable" ng-click="checkout()"  ng-show="peripherelManager.isOnSite && peripheralManager.isCheckedIn">
+			  <span>Checkout</span>
+		  </button>
+		</div>
+
+        <ion-list>
+            <ion-item ng-repeat="(id, device) in peripheralManager.devices" type="item-text-wrap" href="#/tab/device/{{device.uuid}}">
+                RSSI:&nbsp;{{device.rssi}}'&nbsp;|&nbsp;Advertising: {{device.advertising}}<br/>
+                {{device.uuid}}<br/>
+                Distance:&nbsp;{{device.distance}}&nbsp;ft.<br/>
+                Collected:&nbsp;{{device.isCollected}}<br/>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

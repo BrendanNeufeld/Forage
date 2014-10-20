@@ -5,23 +5,18 @@
 -->
 <ion-tabs class="tabs-icon-top">
 
+    <ion-tab title="About" icon="icon ion-android-information" href="#/tab/about">
+        <ion-nav-view name="tab-about"></ion-nav-view>
+    </ion-tab>
 
-  <!-- Pets Tab -->
-  <ion-tab title="RFduinos" icon="icon ion-home" href="#/tab/devices">
-    <ion-nav-view name="tab-devices"></ion-nav-view>
-  </ion-tab>
+    <ion-tab title="Ingredients" icon="icon ion-leaf" href="#/tab/ingredients">
+        <ion-nav-view name="tab-ingredients"></ion-nav-view>
+    </ion-tab>
 
-
-  <!-- Adopt Tab -->
-  <ion-tab title="Friends" icon="icon ion-heart" href="#/tab/friends">
-    <ion-nav-view name="tab-friends"></ion-nav-view>
-  </ion-tab>
-
-
-  <!-- About Tab -->
-  <ion-tab title="Account" icon="icon ion-gear-b" href="#/tab/account">
-    <ion-nav-view name="tab-account"></ion-nav-view>
-  </ion-tab>
-
-
+    <ion-tab title="Recipes" icon="icon ion-ios7-bookmarks" href="#/tab/recipes">
+        <ion-nav-view name="tab-recipes"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="RFduinos" icon="icon ion-bluetooth" href="#/tab/devices" hidden={{!doDebug}}>
+        <ion-nav-view name="tab-devices"></ion-nav-view>
+    </ion-tab>
 </ion-tabs>
