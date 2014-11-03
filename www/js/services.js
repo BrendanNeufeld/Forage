@@ -6,42 +6,30 @@ angular.module('starter.services', [])
 
 	.factory('Config', function () {
 
-		var doDebug = true;
+		var doDebug = false;
 
 		var staticText = {
 			about: {
 				instructions: [
-					{ step: 'Do step one.' },
-					{ step: 'Do step two.' },
-					{ step: 'Do step three.' },
-					{ step: 'Do step four.' }
+					{step: 'Do step one.'},
+					{step: 'Do step two.'},
+					{step: 'Do step three.'},
+					{step: 'Do step four.'}
 				]
 			},
 			recipes: {
-				title: 'Recipes',
-				recipesList: [
-					{ id: "recipe1", name: 'Morel Stew', image: "img/recipe1.jpg", description: "A flavorful stew, Pörkölt is redolent with the fragrance of paprika and bell peppers. It has few ingredients, and is surprisingly easy to make. Save time by using boneless pork chops and cubing them after they are browned. There should be enough salt in the canned tomatoes to season the stew, but if not, add more to your taste. Use best-quality, real Hungarian paprika for best results. We prefer to serve it with noodles, but galuska (Hungarian dumplings) or rice are good, too.", ingredients: [{id: "morel", description:"5 morels, diced"}, {id: "garlic", description:"3 cloves garlic, sliced thin"}], directions: ['Place the garlic in a large, deep skillet, and cook over medium-high heat until evenly browned, about 10 minutes.','Bring a pot with lightly-salted water and bring to a rolling boil; add the morels to the water and return to a boil. Cook uncovered, stirring occasionally, until the morels has cooked through.'], overview: "<span>Prep time: 20 mins</span>|<span>Cooking time: 30 mins</span>"},
-					{ id: "recipe2", name: 'Recipe Two' },
-					{ id: "recipe3", name: 'Recipe Tree' },
-					{ id: "recipe4", name: 'Recipe Four' }
-				]
+				title: 'Recipes'
 			},
-			ingredients: {
-				ingredientsList: [
-					{ id: "morel", distance: 'unkown', isCollected: false, hints: "<ul><li>hint</li></ul>", uuid: '', name: "Morels", image: "img/Morchella.jpg", description: "Morchella, the true morels, is a genus of edible mushrooms closely related to anatomically simpler cup fungi. These distinctive mushrooms appear honeycomb-like in that the upper portion is composed of a network of ridges with pits between them. The ascocarps are prized by gourmet cooks, particularly for French cuisine. Commercial value aside, morels are hunted by thousands of people every year simply for their taste and the joy of the hunt.", recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>", recipes: ['recipe1', 'recipe3'], device: {amount: 0, distance: 'out of range', isCollected: false, isCollecting: false, isConnected: false, isConnecting: false}},
-					{ id: "asparagus", distance: 'unkown', isCollected: false, hints: "<ul><li>hint</li></ul>", uuid: '2679564C-61B3-755B-E2F3-9504ED7337E1', name: "Wild Asparagus", image: "img/asparagus-spear.jpg", description: "Asparagus officinalis is a spring vegetable, a flowering perennial[1] plant species in the genus Asparagus. It was once classified in the lily family, like its Allium cousins, onions and garlic, but the Liliaceae have been split and the onion-like plants are now in the family Amaryllidaceae and asparagus in the Asparagaceae. Asparagus officinalis is native to most of Europe, northern Africa and western Asia, and is widely cultivated as a vegetable crop.", recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>", recipes: ['recipe2', 'recipe4'], device: {amount: 0, distance: 'out of range', isCollected: false, isCollecting: false, isConnected: false, isConnecting: false}},
-					{ id: "garlic", distance: 'unkown', isCollected: false, hints: "<ul><li>hint</li></ul>", uuid: '', name: "Wild Garlic", image: "img/Allium_canadense.jpg", description: "Wild onion (Allium canadense), also known as Canada onion, wild garlic, meadow garlic, and Canadian garlic,[3] is a perennial plant native to eastern North America from Texas to Florida to New Brunswick to Montana. The species is also cultivated in other regions as an ornamental and as a garden culinary herb.[4] The plant is also reportedly naturalized in Cuba.", recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>", recipes: ['recipe1', 'recipe2'], device: {amount: 0, distance: 'out of range', isCollected: false, isCollecting: false, isConnected: false, isConnecting: false}},
-					{ id: "redfife", distance: 'unkown', isCollected: false, hints: "<ul><li>hint</li></ul>", uuid: '', name: "Red Fife Wheat", image: "img/red-fife-1.jpg", description: "Red Fife is a cultivar of bread wheat that originated in Peterborough, Ontario in 1842. It is believed to have crossed several continents and the Atlantic before arriving in Canada, where it gained a foothold on the land of David Fife, from which it is named.", recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>", recipes: ['recipe1'], device: {amount: 0, distance: 'out of range', isCollected: false, isCollecting: false, isConnected: false, isConnecting: false}},
-					{ id: "fiddleheads", distance: 'unkown', isCollected: false, hints: "<ul><li>hint</li></ul>", uuid: '', name: "Fiddlehead Greens", image: "img/fiddlehead.jpg", description: "Fiddlehead greens are the furled fronds of a young fern,[1] harvested for use as a vegetable. Left on the plant, each fiddlehead would unroll into a new frond (circinate vernation)", recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>", recipes: ['recipe1', 'recipe4'], device: {amount: 0, distance: 'out of range', isCollected: false, isCollecting: false, isConnected: false, isConnecting: false}}
-				]
-			},
+			ingredients: {},
 			defaults: {
 				appTitle: 'forage',
 				submit: 'submit',
 				about: 'about',
+				recipes: 'Recipes',
 				ingredients: 'ingredients',
 				gameDescription: 'Welcome to Forage the game where users collect urban foraged ingredients to unlock delicious recipes.',
 				refresh: 'Refresh',
+				location: 'Location',
 				directions: 'directions',
 				play: 'play',
 				welcome: 'welcome',
@@ -60,9 +48,7 @@ angular.module('starter.services', [])
 			}
 		};
 
-		var urls = {
-
-		};
+		var urls = {};
 
 		return {
 			all: function () {
@@ -73,13 +59,13 @@ angular.module('starter.services', [])
 				return staticText['defaults'][id];
 			},
 			staticText: {
-				get: function(id){
+				get: function (id) {
 					if (!id) return staticText['defaults'];
 					return $.extend(true, staticText['defaults'], staticText[id]);
 				}
 			},
 			urls: {
-				get: function(id){
+				get: function (id) {
 					if (!id) return urls;
 					return urls[id];
 				}
@@ -88,9 +74,27 @@ angular.module('starter.services', [])
 		}
 	})
 
-	.factory('Recipes', ['Config', function (Config) {
+	.service('Recipes', ['Config', function (Config) {
 		console.log('Recipes');
-		var recipesList = Config.staticText.get('recipes').recipesList;
+
+		var recipesList = [
+			{
+				id: "recipe1",
+				name: 'Morel Stew',
+				image: "img/recipe1.jpg",
+				description: "A flavorful stew, Pörkölt is redolent with the fragrance of paprika and bell peppers. It has few ingredients, and is surprisingly easy to make. Save time by using boneless pork chops and cubing them after they are browned. There should be enough salt in the canned tomatoes to season the stew, but if not, add more to your taste. Use best-quality, real Hungarian paprika for best results. We prefer to serve it with noodles, but galuska (Hungarian dumplings) or rice are good, too.",
+				ingredients: [{id: "morel", description: "5 morels, diced"}, {
+					id: "garlic",
+					description: "3 cloves garlic, sliced thin"
+				}],
+				directions: ['Place the garlic in a large, deep skillet, and cook over medium-high heat until evenly browned, about 10 minutes.', 'Bring a pot with lightly-salted water and bring to a rolling boil; add the morels to the water and return to a boil. Cook uncovered, stirring occasionally, until the morels has cooked through.'],
+				overview: "<span>Prep time: 20 mins</span>|<span>Cooking time: 30 mins</span>"
+			},
+			{id: "recipe2", name: 'Recipe Two'},
+			{id: "recipe3", name: 'Recipe Tree'},
+			{id: "recipe4", name: 'Recipe Four'}
+		];
+
 		return {
 			all: function () {
 				return recipesList;
@@ -108,38 +112,205 @@ angular.module('starter.services', [])
 
 		var self = this;
 
-		this.ingredients = Config.staticText.get('ingredients').ingredientsList;
-		this.recipes = Config.staticText.get('recipes').recipesList;
+		this.ingredients = [
+			{
+				id: "morel",
+				distance: 'unkown',
+				isCollected: false,
+				recipes: [1, 3],
+				hints: "<ul><li>hint</li></ul>",
+				uuid: '',
+				name: "Morels",
+				image: "img/Morchella.jpg",
+				description: "Morchella, the true morels, is a genus of edible mushrooms closely related to anatomically simpler cup fungi. These distinctive mushrooms appear honeycomb-like in that the upper portion is composed of a network of ridges with pits between them. The ascocarps are prized by gourmet cooks, particularly for French cuisine. Commercial value aside, morels are hunted by thousands of people every year simply for their taste and the joy of the hunt.",
+				recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>",
+				device: {
+					amount: 0,
+					distance: 'out of range',
+					isCollected: false,
+					isCollecting: false,
+					isConnected: false,
+					isConnecting: false
+				}
+			},
+			{
+				id: "asparagus",
+				distance: 'unkown',
+				isCollected: false,
+				recipes: [2, 4],
+				hints: "<ul><li>hint</li></ul>",
+				uuid: '',
+				name: "Wild Asparagus",
+				image: "img/asparagus-spear.jpg",
+				description: "Asparagus officinalis is a spring vegetable, a flowering perennial[1] plant species in the genus Asparagus. It was once classified in the lily family, like its Allium cousins, onions and garlic, but the Liliaceae have been split and the onion-like plants are now in the family Amaryllidaceae and asparagus in the Asparagaceae. Asparagus officinalis is native to most of Europe, northern Africa and western Asia, and is widely cultivated as a vegetable crop.",
+				recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>",
+				device: {
+					amount: 0,
+					distance: 'out of range',
+					isCollected: false,
+					isCollecting: false,
+					isConnected: false,
+					isConnecting: false
+				}
+			},
+			{
+				id: "garlic",
+				distance: 'unkown',
+				isCollected: false,
+				recipes: [1, 2],
+				hints: "<ul><li>hint</li></ul>",
+				uuid: '',
+				name: "Wild Garlic",
+				image: "img/Allium_canadense.jpg",
+				description: "Wild onion (Allium canadense), also known as Canada onion, wild garlic, meadow garlic, and Canadian garlic,[3] is a perennial plant native to eastern North America from Texas to Florida to New Brunswick to Montana. The species is also cultivated in other regions as an ornamental and as a garden culinary herb.[4] The plant is also reportedly naturalized in Cuba.",
+				recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>",
+				device: {
+					amount: 0,
+					distance: 'out of range',
+					isCollected: false,
+					isCollecting: false,
+					isConnected: false,
+					isConnecting: false
+				}
+			},
+			{
+				id: "redfife",
+				distance: 'unkown',
+				isCollected: false,
+				recipes: [1],
+				hints: "<ul><li>hint</li></ul>",
+				uuid: '',
+				name: "Red Fife Wheat",
+				image: "img/red-fife-1.jpg",
+				description: "Red Fife is a cultivar of bread wheat that originated in Peterborough, Ontario in 1842. It is believed to have crossed several continents and the Atlantic before arriving in Canada, where it gained a foothold on the land of David Fife, from which it is named.",
+				recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>",
+				device: {
+					amount: 0,
+					distance: 'out of range',
+					isCollected: false,
+					isCollecting: false,
+					isConnected: false,
+					isConnecting: false
+				}
+			},
+			{
+				id: "fiddleheads",
+				distance: 'unkown',
+				isCollected: false,
+				recipes: [1, 4],
+				hints: "<ul><li>hint</li></ul>",
+				uuid: '',
+				name: "Fiddlehead Greens",
+				image: "img/fiddlehead.jpg",
+				description: "Fiddlehead greens are the furled fronds of a young fern,[1] harvested for use as a vegetable. Left on the plant, each fiddlehead would unroll into a new frond (circinate vernation)",
+				recipe: "This is my recipe. <br>isn't it fine!<ol><li>Instruction</li></ol>",
+				device: {
+					amount: 0,
+					distance: 'out of range',
+					isCollected: false,
+					isCollecting: false,
+					isConnected: false,
+					isConnecting: false
+				}
+			}
+		];
+
+		this.recipes = [
+			{
+				id: "morelStew",
+				name: 'Morel Stew',
+				hasIngredients: false,
+				image: "img/recipe1.jpg",
+				ingredients: [{id: "morel", description: "5 morels, diced"}],
+				overview: "<span>Prep time: 20 mins</span>|<span>Cooking time: 30 mins</span>",
+				description: "A flavorful stew, Pörkölt is redolent with the fragrance of paprika and bell peppers. It has few ingredients, and is surprisingly easy to make. Save time by using boneless pork chops and cubing them after they are browned. There should be enough salt in the canned tomatoes to season the stew, but if not, add more to your taste. Use best-quality, real Hungarian paprika for best results. We prefer to serve it with noodles, but galuska (Hungarian dumplings) or rice are good, too.",
+				directions: ['Place the garlic in a large, deep skillet, and cook over medium-high heat until evenly browned, about 10 minutes.', 'Bring a pot with lightly-salted water and bring to a rolling boil; add the morels to the water and return to a boil. Cook uncovered, stirring occasionally, until the morels has cooked through.']
+			},
+			{
+				id: "recipeTwo",
+				name: 'Recipe Two',
+				hasIngredients: false,
+				image: "img/recipe1.jpg",
+				ingredients: [{id: "asparagus", description: "5 asparagus, sliced"}, {
+					id: "redfife",
+					description: "3 redfife, sliced thin"
+				}],
+				overview: "<span>Prep time: 20 mins</span>|<span>Cooking time: 30 mins</span>",
+				description: "A flavorful pooh, A delicious description of some dish...",
+				directions: ['Boil some water or something...', 'Drop on floor and pick up quickly.']
+			},
+			{
+				id: "recipeThree",
+				name: 'Recipe Tree',
+				hasIngredients: false,
+				image: "img/recipe1.jpg",
+				ingredients: [{id: "garlic", description: "5 asparagus, sliced"}, {
+					id: "redfife",
+					description: "3 redfife, sliced thin"
+				}],
+				overview: "<span>Prep time: 20 mins</span>|<span>Cooking time: 30 mins</span>",
+				description: "A flavorful pooh, A delicious description of some dish...",
+				directions: ['Boil some water or something...', 'Drop on floor and pick up quickly.']
+			},
+			{
+				id: "recipeFour",
+				name: 'Recipe Four',
+				hasIngredients: false,
+				image: "img/recipe1.jpg",
+				ingredients: [{id: "fiddleheads", description: "5 asparagus, sliced"}, {
+					id: "redfife",
+					description: "3 redfife, sliced thin"
+				}],
+				overview: "<span>Prep time: 20 mins</span>|<span>Cooking time: 30 mins</span>",
+				description: "A flavorful pooh, A delicious description of some dish...",
+				directions: ['Boil some water or something...', 'Drop on floor and pick up quickly.']
+			}
+		];
+
+
 		this.description = Config.staticText.get().gameDescription;
 
-		this.setCollected = function ($id, $value) {
-			for (var i = 0; i < self.ingredients.length; i++) {
-				if (ingredientId == $id) {
-					self.ingredients[ingredientId].isCollected = $value;
+		/*this.setCollected = function ($id, $value) {
+		 for (var i = 0; i < self.ingredients.length; i++) {
+		 if (ingredientId == $id) {
+		 self.ingredients[ingredientId].isCollected = $value;
+		 }
+		 }
+		 };*/
+
+		/*		this.allIngredients = function () {
+		 return self.ingredients;
+		 };
+
+		 this.getIngredient = function (ingredientId) {
+		 console.log(ingredientId);
+		 var ingId = 0;
+		 for (var i = 0; i < self.ingredients.length; i++) {
+		 if (ingredientId == self.ingredients[i].id) {
+		 ingId = i;
+		 }
+		 }
+
+		 console.log('self.ingredients[ingredientId]: ', self.ingredients[ingId]);
+
+		 return self.ingredients[ingId]
+		 };*/
+
+		this.getIngredientRecipes = function(ingredientId){
+			var ingredientRecipes = [];
+			for(var i = 0; i < self.ingredients.length; i++){
+				if(self.ingredients[i].id == ingredientId){
+					for (var r = 0; r < self.ingredients[i].recipes.length; r++){
+						//ingredientRecipes.push(self.recipes[self.ingredients[i].recipes[r]-1]);
+						ingredientRecipes[ingredientRecipes.length] = self.recipes[self.ingredients[i].recipes[r]-1];
+					}
 				}
 			}
-		};
-
-/*		this.allIngredients = function () {
-			return self.ingredients;
-		};
-
-		this.getIngredient = function (ingredientId) {
-			console.log(ingredientId);
-			var ingId = 0;
-			for (var i = 0; i < self.ingredients.length; i++) {
-				if (ingredientId == self.ingredients[i].id) {
-					ingId = i;
-				}
-			}
-
-			console.log('self.ingredients[ingredientId]: ', self.ingredients[ingId]);
-
-			return self.ingredients[ingId]
-		};*/
+			return ingredientRecipes;
+		}
 
 		this.getList = function (list) {
-			console.log('list: ',self.recipes)
+			console.log('list: ', self.recipes);
 			return self[list];
 		};
 
@@ -152,11 +323,10 @@ angular.module('starter.services', [])
 				}
 			}
 
-			console.log('list: ', list, ', item: ',self[list][itemIndex]);
+			console.log('list: ', list, ', item: ', self[list][itemIndex]);
 
 			return self[list][itemIndex]
 		};
-
 
 
 	}])
@@ -254,7 +424,7 @@ angular.module('starter.services', [])
 			//console.log('discoverPeripherals');
 			var discTime = sec || discoverTime;
 			rfduino.discover(discTime, function (device) {
-				console.log('rfduino.discover');
+				//console.log('rfduino.discover');
 				$rootScope.$apply(function () {
 					if (self.devices[device.uuid]) {
 						device.isConnecting = self.devices[device.uuid].isConnecting;
@@ -303,15 +473,15 @@ angular.module('starter.services', [])
 					self.devices[device.uuid] = device;
 //
 //                    alert(Game.ingredients[0].uuid);
-					console.log(device);
+					//console.log(device);
 
 					for (var i = 0; i < Game.ingredients.length; i++) {
 						if (device.advertising == Game.ingredients[i].id) {
 //							Game.ingredients[i].distance = device.distance;
 							Game.ingredients[i].device = self.devices[device.uuid];
-							console.log(Game.ingredients[i].id);
-							console.log(Game.ingredients[i]);
-							console.log(device);
+							//console.log(Game.ingredients[i].id);
+							//console.log(Game.ingredients[i]);
+							//console.log(device);
 							//$.extend( true, device, Game.ingredients[i]);
 
 							//alert('match')
@@ -382,6 +552,13 @@ angular.module('starter.services', [])
 							if (a[0] <= 0) {
 								self.isCollecting = false;
 								self.devices[uuid].isCollected = true;
+
+								for (var i = 0; i < Game.ingredients.length; i++) {
+									if (self.devices[uuid].advertising == Game.ingredients[i].id) {
+										Game.ingredients[i].isCollected = true;
+									}
+								}
+								self.updateRecipes();
 								self.disconnect(uuid);
 							} else {
 								self.devices[uuid].isCollected = false;
@@ -412,6 +589,28 @@ angular.module('starter.services', [])
 				doDiscover = true;
 				self.discoverPeripherals();
 			});
+		};
+
+		this.updateRecipes = function(){
+			console.log('updateRecipes');
+			for(var r = 0; r < Game.recipes.length; r++){
+				var recipeTotalIngredients = Game.recipes[r].ingredients.length;
+				var recipeIngredientsCollected = 0;
+				console.log(Game.recipes[r].id,' has ',recipeTotalIngredients,' ingredients.');
+				for(var i=0; i < recipeTotalIngredients; i++){
+					for (var p = 0; p < Game.ingredients.length; p++){
+						if(Game.ingredients[p].id == Game.recipes[r].ingredients[i].id && Game.ingredients[p].isCollected){
+							recipeIngredientsCollected++;
+						}
+					}
+				}
+				if(recipeIngredientsCollected == recipeTotalIngredients){
+					Game.recipes[r].hasIngredients = true;
+				}else{
+					Game.recipes[r].hasIngredients = false;
+				}
+				console.log(Game.recipes[r].id,' hasIngredients: ',Game.recipes[r].hasIngredients)
+			}
 		};
 
 		this.disconnect = function (uuid) {
@@ -468,9 +667,15 @@ angular.module('starter.services', [])
 			self.devices[uuid].isCollecting = false;
 			self.devices[uuid].isCollected = false;
 			self.devices[uuid].amount = 0;
+			for (var i = 0; i < Game.ingredients.length; i++) {
+				if (self.devices[uuid].advertising == Game.ingredients[i].id) {
+					Game.ingredients[i].isCollected = false;
+				}
+			}
+			self.updateRecipes();
 			self.disconnect(uuid);
 			//});
-		}
+		};
 
 
 		this.enabled = function () {

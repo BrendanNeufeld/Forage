@@ -3,8 +3,11 @@
         <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/recipes">Back</a>
     </ion-nav-bar>
   <ion-content has-header="true" padding="true">
-      <article>
-          <img class="recipe padding" ng-src="{{recipe.image}}" align="left"><span ng-bind-html="recipe.description"></span>
+      <article class="recipe">
+          <section class="pic-description">
+              <img class="recipe padding" ng-src="{{recipe.image}}" align="left">
+              <span ng-bind-html="recipe.description"></span>
+          </section>
           <section ng-bind-html="recipe.overview" class="overview"></section>
           <section>
               <h4>{{st.ingredients}}</h4>

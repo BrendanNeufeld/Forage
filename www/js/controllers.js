@@ -17,9 +17,9 @@ angular.module('starter.controllers', [])
 
         $scope.peripheralManager = PeripheralManager;
 
-        $scope.ingredients = Game.getList('ingredients');
+         $scope.ingredients = Game.getList('ingredients');
 
-		$scope.st = Config.staticText.get('ingredients');
+         $scope.st = Config.staticText.get('ingredients');
 
         /*PeripheralManager.disconnect();
 
@@ -30,26 +30,87 @@ angular.module('starter.controllers', [])
 
     }])
 
-    .controller('IngredientDetailCtrl', function ($scope, $rootScope, $stateParams, PeripheralManager, Game) {
+    .controller('IngredientDetailCtrl', function ($scope, $rootScope, $stateParams, PeripheralManager, Game, Config) {
         console.log('IngredientDetailCtrl');
 
-        $scope.toggleConnect = function(){
-
-        }
-
-//        $scope.ingredient = Game.getIngredient($stateParams.ingredientId);
+        $scope.peripheralManager = PeripheralManager;
+        $scope.st = Config.staticText.get('ingredients');
         $scope.ingredient = Game.getListItem('ingredients', $stateParams.ingredientId);
+        $scope.recipes = Game.getIngredientRecipes($stateParams.ingredientId);
+        console.log('$scope.recipes: ',$scope.recipes);
+        var deviceId = $scope.ingredient.device.uuid;
+        $scope.deviceId = deviceId;
+        console.log('$scope.deviceId: ',$scope.deviceId);
 
-        //console.log('Game: ',Game);
+        $scope.$watch('ingredient.isCollected', function() {
+            /*$rootScope.$apply(function () {
+                //$scope.recipes = Game.getIngredientRecipes($stateParams.ingredientId);
+            }*/
+        });
 
-        //console.log('$stateParams.ingredientId: ',$stateParams.ingredientId);
+        $scope.showRecipe = function($event, recipe){
+            if(recipe.hasIngredients){
+                $location.path('/tab/recipe/'+recipe.id);
+            }else{
+                var $i = $($event.currentTarget).find('i');
+                if(!$i.hasClass('shake')){
+                    $i.addClass('shake').on( 'webkitAnimationEnd', function() {
+                        $i.off( 'webkitAnimationEnd' );
+                        $i.removeClass('shake');
+                    });
+                }
+            }
+        };
+
+        $scope.toggleConnect = function () {
+            console.log('toggleConnect: ',deviceId);
+
+            if(PeripheralManager.devices[deviceId].isConnecting) return;
+
+            if(PeripheralManager.devices[deviceId].isConnected){
+                PeripheralManager.disconnect(deviceId);
+            }else{
+                PeripheralManager.connect(deviceId);
+            }
+        };
+
+        $scope.collect = function () {
+            console.log('collect: ',deviceId);
+            PeripheralManager.collect(deviceId);
+/*            return;
+
+            if(PeripheralManager.devices[deviceId].isCollecting) return;
+
+            if(PeripheralManager.devices[deviceId].isCollected){
+                PeripheralManager.disconnect(deviceId);
+            }else{
+                PeripheralManager.collect(deviceId);
+            }*/
+        };
+
+        $scope.reset = function () {
+            PeripheralManager.reset(deviceId);
+        };
 
         console.log("ingredient:", $scope.ingredient);
     })
 
-	.controller('RecipesCtrl', ['$scope', 'Game', function ($scope, Game) {
-//		console.log(Game.getList('recipes'))
+	.controller('RecipesCtrl', ['$scope', 'Game', 'Config', '$location', function ($scope, Game, Config, $location) {
 		$scope.recipes = Game.getList('recipes');
+        $scope.st = Config.staticText.get('ingredients');
+        $scope.showRecipe = function($event, recipe){
+            if(recipe.hasIngredients){
+                $location.path('/tab/recipe/'+recipe.id);
+            }else{
+                var $i = $($event.currentTarget).find('i');
+                if(!$i.hasClass('shake')){
+                    $i.addClass('shake').on( 'webkitAnimationEnd', function() {
+                        $i.off( 'webkitAnimationEnd' );
+                        $i.removeClass('shake');
+                    });
+                }
+            }
+        };
 	}])
 
 	.controller('RecipeDetailCtrl', ['$scope', '$stateParams', 'Game', 'Config', function ($scope, $stateParams, Game, Config) {
@@ -92,7 +153,7 @@ angular.module('starter.controllers', [])
         $scope.collect = function () {
             console.log('collect: ',$stateParams.deviceId);
             PeripheralManager.collect($stateParams.deviceId);
-            return;
+/*            return;
 
             if(PeripheralManager.devices[$stateParams.deviceId].isCollecting) return;
 
@@ -100,7 +161,7 @@ angular.module('starter.controllers', [])
                 PeripheralManager.disconnect($stateParams.deviceId);
             }else{
                 PeripheralManager.collect($stateParams.deviceId);
-            }
+            }*/
         };
 
         $scope.reset = function () {

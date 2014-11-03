@@ -1,56 +1,59 @@
-<ion-view title="{{ingredient.name}}" class="ingredients collected-{{ingredient.isCollected}}">
+<ion-view title="{{ingredient.name}}" class="ingredients">
     <ion-nav-bar class="bar-stable nav-title-slide-ios7">
         <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/ingredients">Back</a>
     </ion-nav-bar>
     <ion-content has-header="true" padding="true">
-        <div ng-show={{doDebug}}>
-            {{peripheralManager.devices[deviceId].name}}<br/>
-            RSSI:&nbsp;{{peripheralManager.devices[deviceId].rssi}}'&nbsp;|&nbsp;Advertising:
-            {{peripheralManager.devices[deviceId].advertising}}<br/>
-            {{peripheralManager.devices[deviceId].uuid}}<br/>
-            Connected:&nbsp;{{peripheralManager.devices[deviceId].isConnected | json}}<br/>
-            Connecting:&nbsp;{{peripheralManager.devices[deviceId].isConnecting | json}}<br/>
-            Distance:&nbsp;{{peripheralManager.devices[deviceId].distance}}&nbsp;ft.<br/>
-            Amount:&nbsp;{{peripheralManager.devices[deviceId].amount}}<br/>
-            Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
-        </div>
-        <article>
-            <img class="ingredient padding" ng-src="{{ingredient.image}}" align="left">
+        <article class="ingredient">
+            <div ng-show=false>
+                {{peripheralManager.devices[deviceId].name}}<br/>
+                RSSI:&nbsp;{{peripheralManager.devices[deviceId].rssi}}'&nbsp;|&nbsp;Advertising:
+                {{peripheralManager.devices[deviceId].advertising}}<br/>
+                {{peripheralManager.devices[deviceId].uuid}}<br/>
+                Connected:&nbsp;{{peripheralManager.devices[deviceId].isConnected | json}}<br/>
+                Connecting:&nbsp;{{peripheralManager.devices[deviceId].isConnecting | json}}<br/>
+                Distance:&nbsp;{{peripheralManager.devices[deviceId].distance}}&nbsp;ft.<br/>
+                Amount:&nbsp;{{peripheralManager.devices[deviceId].amount}}<br/>
+                Collected:&nbsp;{{peripheralManager.devices[deviceId].isCollected | json}}<br/>
+            </div>
+            <section>
+                <img class="padding" ng-src="{{ingredient.image}}" align="left">
+                <span ng-bind-html="ingredient.description"></span>
 
-            <span ng-bind-html="ingredient.description"></span>
-            <section>{{ingredient.uuid}}</section>
-            <section>Whaaat: {{ingredient.distance}}</section>
-            <section><h1>Location</h1>
-
-                <div ng-bind-html="ingredient.hints"></div>
+                <section><h3>{{st.location}}</h3>
+                    <div ng-bind-html="ingredient.hints"></div>
+                </section>
+                <section><h3>{{st.recipes}}</h3>
+                    <ul>
+                        <li ng-repeat="recipe in recipes" ng-click="showRecipe($event, recipe)">
+                            {{recipe.name}}&nbsp;&nbsp;<i ng-show={{!recipe.hasIngredients}} class="icon ion-ios7-locked-outline"></i>
+                        </li>
+                    </ul>
+                </section>
+                <section ng-show="ingredient.isCollected"><h1>Recipe</h1>
+                    <div ng-bind-html="ingredient.recipe"></div>
+                </section>
             </section>
-            <section ng-show="ingredient.isCollected"><h1>Recipe</h1>
 
-                <div ng-bind-html="ingredient.recipe"></div>
-            </section>
+            <div class="padding">
+                <button class="button button-block button-stable" ng-click="toggleConnect()"
+                        ng-disabled="peripheralManager.isConnecting || peripheralManager.devices[deviceId].isCollected">
+                    <span ng-show="peripheralManager.devices[deviceId].isConnected" class="help-block">Disconnect</span>
+                    <span ng-show="!peripheralManager.devices[deviceId].isConnected" class="help-block">Connect</span>
+                </button>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-stable" ng-click="collect()"
+                        ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected || !peripheralManager.devices[deviceId].isConnected">
+                    <span>Collect</span>
+                </button>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-stable" ng-click="reset()"
+                        ng-show="peripheralManager.devices[deviceId].isCollected">
+                    <span>Reset</span>
+                </button>
+            </div>
+
         </article>
-        <div class="padding">
-            <button class="button button-block button-stable" ng-click="toggleConnect()"
-                    ng-disabled="peripheralManager.isConnecting || peripheralManager.devices[deviceId].isCollected">
-                <span ng-show="peripheralManager.devices[deviceId].isConnected" class="help-block">Disconnect</span>
-                <span ng-show="!peripheralManager.devices[deviceId].isConnected" class="help-block">Connect</span>
-            </button>
-        </div>
-        <div class="padding">
-            <button class="button button-block button-stable" ng-click="ping()"
-                    ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected || !peripheralManager.devices[deviceId].isConnected">
-                <span>Ping</span>
-            </button>
-            <button class="button button-block button-stable" ng-click="collect()"
-                    ng-disabled="peripheralManager.isCollecting || peripheralManager.devices[deviceId].isCollected || !peripheralManager.devices[deviceId].isConnected">
-                <span>Collect</span>
-            </button>
-        </div>
-        <div class="padding">
-            <button class="button button-block button-stable" ng-click="reset()"
-                    ng-show="peripheralManager.devices[deviceId].isCollected">
-                <span>Reset</span>
-            </button>
-        </div>
     </ion-content>
 </ion-view>

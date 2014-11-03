@@ -1,9 +1,9 @@
-<ion-view title="Recipes">
+<ion-view title="{{st.recipes}}">
     <ion-nav-bar class="bar-stable nav-title-slide-ios7"></ion-nav-bar>
     <ion-content class="has-header padding">
         <ion-list>
-            <ion-item ng-repeat="recipe in recipes" type="item-text-wrap" href="#/tab/recipe/{{recipe.id}}">
-                {{recipe.name}}
+            <ion-item ng-repeat="recipe in recipes" type="item-text-wrap" class="item-icon-right" ng-click="showRecipe($event, recipe)">
+                {{recipe.name}}<i ng-show={{!recipe.hasIngredients}} class="icon ion-ios7-locked-outline"></i>
             </ion-item>
         </ion-list>
     </ion-content>
